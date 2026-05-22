@@ -1,0 +1,45 @@
+[app]
+name = "audio-detector"
+version = "0.1.0"
+log_level = "info"
+
+[input]
+device_name = "GXTrust Emita II"
+sample_rate = 44100
+channels = 2
+sample_format = "f32"
+backend = "auto"
+
+[buffer]
+buffer_size = 1024
+window_size = 2048
+hop_size = 512
+
+[processing]
+normalize = true
+highpass_hz = 0
+lowpass_hz = 0
+
+[features]
+enable_energy = true
+enable_zcr = true
+enable_fft = false
+enable_mfcc = false
+mfcc_coeffs = 13
+
+[classifier]
+type = "basic"
+threshold = 0.7
+
+[storage]
+dataset_path = "./data"
+cache_features = true
+
+[ai]
+enabled = false
+model_path = "./model.onnx"
+input_type = "spectrogram"
+
+[output]
+mode = "stdout"
+events_file = "events.log"
